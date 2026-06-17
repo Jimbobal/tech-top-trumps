@@ -47,6 +47,10 @@ export function TitanCard({ card, hidden = false, selectedStat, compact = false 
 
   return (
     <article className={`titan-card ${rarityClass[card.rarity]} ${compact ? "compact-card" : ""}`}>
+      <div className="retro-card-brand">
+        <span>Project Flux</span>
+        <strong>Top Trumps</strong>
+      </div>
       <div className="card-topline">
         <span>{card.rarity} Class</span>
         <strong>{card.organisation}</strong>
