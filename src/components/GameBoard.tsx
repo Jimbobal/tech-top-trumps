@@ -7,6 +7,7 @@ import {
   continueState,
   createGameState,
   getWinner,
+  getRoundCards,
   isGameOver,
   playerName,
   type GameState,
@@ -50,12 +51,10 @@ export function GameBoard() {
   const gameOver = isGameOver(gameState);
   const viewerPlayer = onlineRole ?? gameState.activePlayer;
   const opponentPlayer = opponent(viewerPlayer);
-  const viewerDeck = viewerPlayer === "p1" ? gameState.p1Deck : gameState.p2Deck;
-  const opponentDeck = opponentPlayer === "p1" ? gameState.p1Deck : gameState.p2Deck;
-  const activeDeck = gameState.activePlayer === "p1" ? gameState.p1Deck : gameState.p2Deck;
-  const viewerCard = cardFromId(viewerDeck[0]);
-  const opponentCard = cardFromId(opponentDeck[0]);
-  const activeCard = cardFromId(activeDeck[0]);
+  const roundCards = getRoundCards(gameState);
+  const viewerCard = cardFromId(roundCards[viewerPlayer] ?? undefined);
+  const opponentCard = cardFromId(roundCards[opponentPlayer] ?? undefined);
+  const activeCard = cardFromId(roundCards[gameState.activePlayer] ?? undefined);
   const canChoose = !gameOver && !gameState.selectedStat && (!online || onlineRole === gameState.activePlayer);
   const shareUrl = roomId && typeof window !== "undefined" ? `${window.location.origin}?room=${roomId}` : "";
 

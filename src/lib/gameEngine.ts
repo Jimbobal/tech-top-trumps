@@ -12,6 +12,10 @@ export type GameState = {
   p1Deck: string[];
   p2Deck: string[];
   pendingPot: string[];
+  roundCards: {
+    p1: string | null;
+    p2: string | null;
+  };
   activePlayer: PlayerId;
   selectedStat: StatKey | null;
   revealed: boolean;
@@ -44,6 +48,10 @@ export function createGameState(): GameState {
     p1Deck: shuffled.slice(0, 12),
     p2Deck: shuffled.slice(12),
     pendingPot: [],
+    roundCards: {
+      p1: shuffled[0] ?? null,
+      p2: shuffled[12] ?? null,
+    },
     activePlayer: "p1",
     selectedStat: null,
     revealed: false,
@@ -53,6 +61,13 @@ export function createGameState(): GameState {
       tone: "neutral",
     },
     updatedAt: Date.now(),
+  };
+}
+
+export function getRoundCards(state: GameState) {
+  return {
+    p1: state.roundCards?.p1 ?? state.p1Deck[0] ?? null,
+    p2: state.roundCards?.p2 ?? state.p2Deck[0] ?? null,
   };
 }
 
@@ -69,8 +84,9 @@ export function isGameOver(state: GameState) {
 export function chooseStatForState(state: GameState, stat: StatKey): GameState {
   if (state.selectedStat || isGameOver(state)) return state;
 
-  const p1Card = cardFromId(state.p1Deck[0]);
-  const p2Card = cardFromId(state.p2Deck[0]);
+  const roundCards = getRoundCards(state);
+  const p1Card = cardFromId(roundCards.p1 ?? undefined);
+  const p2Card = cardFromId(roundCards.p2 ?? undefined);
   if (!p1Card || !p2Card) return state;
 
   const activeCard = state.activePlayer === "p1" ? p1Card : p2Card;
@@ -90,6 +106,10 @@ export function chooseStatForState(state: GameState, stat: StatKey): GameState {
         p1Deck: reshuffledPot.slice(0, Math.ceil(reshuffledPot.length / 2)),
         p2Deck: reshuffledPot.slice(Math.ceil(reshuffledPot.length / 2)),
         pendingPot: [],
+        roundCards: {
+          p1: p1Card.id,
+          p2: p2Card.id,
+        },
         selectedStat: stat,
         revealed: true,
         roundResult: {
@@ -107,6 +127,10 @@ export function chooseStatForState(state: GameState, stat: StatKey): GameState {
         p1Deck: [],
         p2Deck: [...nextP2Deck, ...potCards],
         pendingPot: [],
+        roundCards: {
+          p1: p1Card.id,
+          p2: p2Card.id,
+        },
         selectedStat: stat,
         revealed: true,
         roundResult: {
@@ -124,6 +148,10 @@ export function chooseStatForState(state: GameState, stat: StatKey): GameState {
         p1Deck: [...nextP1Deck, ...potCards],
         p2Deck: [],
         pendingPot: [],
+        roundCards: {
+          p1: p1Card.id,
+          p2: p2Card.id,
+        },
         selectedStat: stat,
         revealed: true,
         roundResult: {
@@ -140,6 +168,10 @@ export function chooseStatForState(state: GameState, stat: StatKey): GameState {
       p1Deck: nextP1Deck,
       p2Deck: nextP2Deck,
       pendingPot: potCards,
+      roundCards: {
+        p1: p1Card.id,
+        p2: p2Card.id,
+      },
       selectedStat: stat,
       revealed: true,
       roundResult: {
@@ -158,6 +190,10 @@ export function chooseStatForState(state: GameState, stat: StatKey): GameState {
     p1Deck: winningPlayer === "p1" ? [...nextP1Deck, ...potCards] : nextP1Deck,
     p2Deck: winningPlayer === "p2" ? [...nextP2Deck, ...potCards] : nextP2Deck,
     pendingPot: [],
+    roundCards: {
+      p1: p1Card.id,
+      p2: p2Card.id,
+    },
     activePlayer: winningPlayer,
     selectedStat: stat,
     revealed: true,
@@ -171,8 +207,14 @@ export function chooseStatForState(state: GameState, stat: StatKey): GameState {
 }
 
 export function continueState(state: GameState): GameState {
+  const nextRoundCards = {
+    p1: state.p1Deck[0] ?? null,
+    p2: state.p2Deck[0] ?? null,
+  };
+
   return {
     ...state,
+    roundCards: nextRoundCards,
     selectedStat: null,
     revealed: false,
     updatedAt: Date.now(),

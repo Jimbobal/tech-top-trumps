@@ -12,6 +12,10 @@
   --green: #36e391;
   --orange: #ff9a3d;
   --violet: #a66bff;
+  --retro-blue: #0067b1;
+  --retro-yellow: #ffd43b;
+  --retro-red: #df1f2d;
+  --retro-cream: #fff4c8;
 }
 
 * {
@@ -319,44 +323,46 @@ button {
 
 .titan-card {
   position: relative;
-  width: min(100%, 410px);
-  min-height: 690px;
+  width: min(100%, 380px);
+  min-height: 704px;
   overflow: hidden;
-  padding: 12px;
-  border: 7px solid var(--flux);
-  border-radius: 8px;
+  padding: 10px;
+  border: 9px solid var(--retro-blue);
+  border-radius: 5px;
   background:
-    linear-gradient(180deg, #f7f2db, #eadba8 48%, #101010 48%),
-    var(--panel-strong);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 12px),
+    linear-gradient(180deg, var(--retro-yellow), #f9e078 38%, var(--retro-red) 38%, var(--retro-red) 44%, #101010 44%),
+    var(--retro-cream);
   box-shadow:
-    inset 0 0 0 3px #101010,
-    inset 0 0 0 5px rgba(255, 255, 255, 0.62),
-    0 18px 48px rgba(0, 0, 0, 0.42);
+    inset 0 0 0 3px #ffffff,
+    inset 0 0 0 6px #111111,
+    10px 12px 0 rgba(0, 0, 0, 0.42),
+    0 18px 48px rgba(0, 0, 0, 0.46);
 }
 
 .titan-card::before {
   position: absolute;
-  inset: 8px;
+  inset: 7px;
   pointer-events: none;
-  border: 2px solid rgba(0, 0, 0, 0.68);
-  border-radius: 3px;
+  border: 3px solid #111111;
+  border-radius: 1px;
   content: "";
 }
 
 .rarity-founder {
-  border-color: #d9e1ef;
+  border-color: #747474;
 }
 
 .rarity-disruptor {
-  border-color: var(--orange);
+  border-color: #ff7a00;
 }
 
 .rarity-innovator {
-  border-color: var(--cyan);
+  border-color: #00a7d8;
 }
 
 .rarity-legend {
-  border-color: var(--gold);
+  border-color: #f3c800;
 }
 
 .rarity-titan {
@@ -371,11 +377,12 @@ button {
   justify-content: space-between;
   gap: 10px;
   min-height: 28px;
-  padding: 5px 8px;
-  border: 2px solid #111111;
-  border-radius: 4px 4px 0 0;
+  padding: 6px 8px;
+  border: 3px solid #111111;
+  border-radius: 0;
   color: #111111;
-  background: #f8c84d;
+  background: var(--retro-yellow);
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.14);
 }
 
 .card-topline strong {
@@ -394,9 +401,9 @@ button {
   display: block;
   aspect-ratio: 4 / 3;
   height: auto;
-  margin: 0 0 10px;
+  margin: 0 0 8px;
   overflow: hidden;
-  border: 3px solid #111111;
+  border: 4px solid #111111;
   border-top: 0;
   background:
     linear-gradient(135deg, rgba(255, 45, 85, 0.18), transparent 45%),
@@ -412,7 +419,7 @@ button {
   object-position: center center;
   background:
     radial-gradient(circle at center, rgba(255, 255, 255, 0.12), transparent 56%),
-    #151515;
+    #f3e7b8;
 }
 
 .portrait span {
@@ -434,8 +441,8 @@ button {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(110deg, rgba(255, 255, 255, 0.3), transparent 28%),
-    linear-gradient(180deg, transparent 64%, rgba(0, 0, 0, 0.58));
+    linear-gradient(110deg, rgba(255, 255, 255, 0.28), transparent 26%),
+    linear-gradient(180deg, transparent 72%, rgba(0, 0, 0, 0.28));
 }
 
 .card-heading,
@@ -448,31 +455,33 @@ button {
 
 .card-heading h2 {
   margin: 0;
-  padding: 8px 10px 7px;
-  border: 3px solid #111111;
-  border-radius: 4px 4px 0 0;
+  padding: 8px 9px 7px;
+  border: 4px solid #111111;
+  border-radius: 0;
   color: #ffffff;
-  background: #111111;
-  font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+  background: var(--retro-red);
+  font-size: clamp(1.22rem, 2.1vw, 1.62rem);
   line-height: 1;
   text-align: center;
+  text-shadow: 2px 2px 0 #111111;
   text-transform: uppercase;
 }
 
 .card-heading p {
-  min-height: 74px;
-  padding: 8px 10px;
-  border: 3px solid #111111;
+  min-height: 68px;
+  padding: 7px 9px;
+  border: 4px solid #111111;
   border-top: 0;
   color: #1a1a1a;
-  background: #fff8d6;
-  font-size: 0.88rem;
+  background: var(--retro-cream);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .stats-grid {
   display: grid;
-  gap: 4px;
-  margin-top: 10px;
+  gap: 3px;
+  margin-top: 8px;
 }
 
 .stat-row {
@@ -480,29 +489,33 @@ button {
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 8px;
-  min-height: 30px;
-  padding: 5px 8px;
-  border: 2px solid #111111;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 3px solid #111111;
   color: #111111;
-  background: #f7f2db;
+  background: #ffffff;
+}
+
+.stat-row:nth-child(even) {
+  background: #dff0ff;
 }
 
 .stat-row span {
   color: #111111;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 900;
   text-transform: uppercase;
 }
 
 .stat-row strong {
   color: #111111;
-  font-size: 1rem;
+  font-size: 1.02rem;
 }
 
 .selected-stat {
   border-color: #111111;
   color: #ffffff;
-  background: var(--flux);
+  background: var(--retro-red);
 }
 
 .selected-stat span,
@@ -511,18 +524,18 @@ button {
 }
 
 .ability {
-  min-height: 82px;
-  margin-top: 10px;
-  padding: 9px 10px;
-  border: 2px solid #111111;
+  min-height: 78px;
+  margin-top: 8px;
+  padding: 8px 9px;
+  border: 3px solid #111111;
   color: #111111;
-  background: #f8c84d;
+  background: var(--retro-yellow);
 }
 
 .ability p {
   margin-top: 5px;
   color: #111111;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   font-weight: 700;
 }
 
