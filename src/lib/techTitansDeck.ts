@@ -1,0 +1,278 @@
+export type StatKey =
+  | "wealth"
+  | "innovation"
+  | "vision"
+  | "execution"
+  | "aiInfluence"
+  | "industryImpact"
+  | "legacy"
+  | "publicProfile";
+
+export type Rarity = "Founder" | "Disruptor" | "Innovator" | "Legend" | "Titan";
+
+export type TitanCardData = {
+  id: string;
+  name: string;
+  organisation: string;
+  rarity: Rarity;
+  shortBio: string;
+  specialAbility: string;
+  portraitUrl: string;
+  stats: Record<StatKey, number>;
+};
+
+export const statLabels: Record<StatKey, string> = {
+  wealth: "Wealth",
+  innovation: "Innovation",
+  vision: "Vision",
+  execution: "Execution",
+  aiInfluence: "AI Influence",
+  industryImpact: "Industry Impact",
+  legacy: "Legacy",
+  publicProfile: "Public Profile",
+};
+
+export const statKeys = Object.keys(statLabels) as StatKey[];
+
+export const techTitansDeck: TitanCardData[] = [
+  {
+    id: "elon-musk",
+    name: "Elon Musk",
+    organisation: "Tesla, SpaceX, xAI",
+    rarity: "Titan",
+    shortBio: "Serial founder pushing electric transport, space systems, autonomy, and frontier AI.",
+    specialAbility: "First Principles: +5 to Vision when challenged after losing a round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Elon_Musk_-_54820081119_%28cropped%29.jpg/330px-Elon_Musk_-_54820081119_%28cropped%29.jpg",
+    stats: { wealth: 100, innovation: 99, vision: 100, execution: 88, aiInfluence: 95, industryImpact: 99, legacy: 96, publicProfile: 100 },
+  },
+  {
+    id: "steve-jobs",
+    name: "Steve Jobs",
+    organisation: "Apple",
+    rarity: "Titan",
+    shortBio: "Product obsessive who fused hardware, software, design, and culture at global scale.",
+    specialAbility: "Reality Distortion: replay one lost round once per match.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Steve_Jobs_Headshot_2010_%28cropped_4%29.jpg/330px-Steve_Jobs_Headshot_2010_%28cropped_4%29.jpg",
+    stats: { wealth: 80, innovation: 100, vision: 100, execution: 94, aiInfluence: 40, industryImpact: 100, legacy: 100, publicProfile: 98 },
+  },
+  {
+    id: "bill-gates",
+    name: "Bill Gates",
+    organisation: "Microsoft",
+    rarity: "Titan",
+    shortBio: "Built the software platform era and became one of technology's defining strategists.",
+    specialAbility: "Platform King: +10 Legacy against non-Titan cards.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Bill_Gates_at_the_European_Commission_-_P067383-987995_%28cropped%29_5.jpg/330px-Bill_Gates_at_the_European_Commission_-_P067383-987995_%28cropped%29_5.jpg",
+    stats: { wealth: 97, innovation: 92, vision: 92, execution: 99, aiInfluence: 85, industryImpact: 100, legacy: 100, publicProfile: 96 },
+  },
+  {
+    id: "jensen-huang",
+    name: "Jensen Huang",
+    organisation: "NVIDIA",
+    rarity: "Titan",
+    shortBio: "Turned GPUs into the compute engine of modern AI and accelerated science.",
+    specialAbility: "CUDA Moat: automatic win on AI Influence when scores are tied.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Jen-Hsun_Huang_2025.jpg/330px-Jen-Hsun_Huang_2025.jpg",
+    stats: { wealth: 92, innovation: 97, vision: 98, execution: 98, aiInfluence: 100, industryImpact: 96, legacy: 90, publicProfile: 88 },
+  },
+  {
+    id: "jeff-bezos",
+    name: "Jeff Bezos",
+    organisation: "Amazon",
+    rarity: "Legend",
+    shortBio: "Scaled ecommerce, cloud infrastructure, logistics, and long-horizon company building.",
+    specialAbility: "Day 1 Mentality: +5 Execution when behind in total cards.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg/330px-260202-D-PM193-2205_SECWAR_Arsenal_of_Freedom_Tour_-_Florida_%283x4_cropped_on_Bezos_and_rotated%29.jpg",
+    stats: { wealth: 95, innovation: 94, vision: 96, execution: 99, aiInfluence: 75, industryImpact: 99, legacy: 98, publicProfile: 88 },
+  },
+  {
+    id: "larry-page",
+    name: "Larry Page",
+    organisation: "Google",
+    rarity: "Legend",
+    shortBio: "Co-created Google and shaped search, ads, moonshots, and web-scale computing.",
+    specialAbility: "Moonshot Thinking: +10 Vision when choosing first in a round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg/330px-Larry_Page_in_the_European_Parliament%2C_17.06.2009_%28cropped%29.jpg",
+    stats: { wealth: 95, innovation: 94, vision: 98, execution: 92, aiInfluence: 88, industryImpact: 99, legacy: 97, publicProfile: 82 },
+  },
+  {
+    id: "sergey-brin",
+    name: "Sergey Brin",
+    organisation: "Google",
+    rarity: "Legend",
+    shortBio: "Co-founded Google and advanced data-rich products, research bets, and web discovery.",
+    specialAbility: "Innovation Aura: +5 Innovation after losing a round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Sergey_Brin_Ted_2010_%28cropped%29.jpg/330px-Sergey_Brin_Ted_2010_%28cropped%29.jpg",
+    stats: { wealth: 88, innovation: 92, vision: 98, execution: 92, aiInfluence: 82, industryImpact: 99, legacy: 97, publicProfile: 80 },
+  },
+  {
+    id: "satya-nadella",
+    name: "Satya Nadella",
+    organisation: "Microsoft",
+    rarity: "Legend",
+    shortBio: "Rebuilt Microsoft around cloud, developers, enterprise trust, and AI partnerships.",
+    specialAbility: "Empathy Edge: +10 Execution in the final round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/MS-Exec-Nadella-Satya-2017-08-31-22_%28cropped%29.jpg/330px-MS-Exec-Nadella-Satya-2017-08-31-22_%28cropped%29.jpg",
+    stats: { wealth: 70, innovation: 89, vision: 92, execution: 100, aiInfluence: 98, industryImpact: 95, legacy: 88, publicProfile: 84 },
+  },
+  {
+    id: "mark-zuckerberg",
+    name: "Mark Zuckerberg",
+    organisation: "Meta",
+    rarity: "Legend",
+    shortBio: "Scaled social networking to billions and pushed VR, open AI models, and creator tools.",
+    specialAbility: "Network Effect: +5 Industry Impact when winning a round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/F20250904AH-2824_%2854778373111%29_%283x4_cropped_on_Zuckerberg_following_the_rule_of_thirds%29.jpg/330px-F20250904AH-2824_%2854778373111%29_%283x4_cropped_on_Zuckerberg_following_the_rule_of_thirds%29.jpg",
+    stats: { wealth: 96, innovation: 95, vision: 93, execution: 94, aiInfluence: 92, industryImpact: 96, legacy: 92, publicProfile: 98 },
+  },
+  {
+    id: "sam-altman",
+    name: "Sam Altman",
+    organisation: "OpenAI",
+    rarity: "Legend",
+    shortBio: "Helped bring generative AI into mainstream products, policy, and public debate.",
+    specialAbility: "GPT Momentum: +10 AI Influence when taking a round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Meeting_with_Masayoshi_Son_and_Sam_Altman_%28February_3%2C_2025%29_%283x4_cropped_on_Altman%29.jpg/330px-Meeting_with_Masayoshi_Son_and_Sam_Altman_%28February_3%2C_2025%29_%283x4_cropped_on_Altman%29.jpg",
+    stats: { wealth: 75, innovation: 94, vision: 97, execution: 90, aiInfluence: 99, industryImpact: 94, legacy: 82, publicProfile: 90 },
+  },
+  {
+    id: "demis-hassabis",
+    name: "Demis Hassabis",
+    organisation: "Google DeepMind",
+    rarity: "Innovator",
+    shortBio: "Built DeepMind and led AI breakthroughs in games, science, and protein folding.",
+    specialAbility: "Scientist Mind: +10 Innovation and AI Influence when AI is chosen.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Demis_Hassabis%2C_2024_Nobel_Prize_Laureate_in_Chemistry_7_%28cropped%29.jpg/330px-Demis_Hassabis%2C_2024_Nobel_Prize_Laureate_in_Chemistry_7_%28cropped%29.jpg",
+    stats: { wealth: 65, innovation: 99, vision: 95, execution: 90, aiInfluence: 98, industryImpact: 91, legacy: 88, publicProfile: 75 },
+  },
+  {
+    id: "dario-amodei",
+    name: "Dario Amodei",
+    organisation: "Anthropic",
+    rarity: "Innovator",
+    shortBio: "Frontier AI builder focused on capable systems, safety research, and model scaling.",
+    specialAbility: "Safety First: +5 Execution when playing defensively after a draw.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Dario_Amodei_at_TechCrunch_Disrupt_2023_01_%28cropped%29.jpg/330px-Dario_Amodei_at_TechCrunch_Disrupt_2023_01_%28cropped%29.jpg",
+    stats: { wealth: 60, innovation: 92, vision: 93, execution: 88, aiInfluence: 94, industryImpact: 89, legacy: 72, publicProfile: 68 },
+  },
+  {
+    id: "andrew-ng",
+    name: "Andrew Ng",
+    organisation: "DeepLearning.AI",
+    rarity: "Innovator",
+    shortBio: "Educator, researcher, and founder who made machine learning practical for millions.",
+    specialAbility: "Scale Knowledge: +10 AI Influence when teaching stats are compared.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Andrew_Ng_at_TechCrunch_Disrupt_SF_2017.jpg/330px-Andrew_Ng_at_TechCrunch_Disrupt_SF_2017.jpg",
+    stats: { wealth: 75, innovation: 88, vision: 89, execution: 94, aiInfluence: 95, industryImpact: 94, legacy: 94, publicProfile: 84 },
+  },
+  {
+    id: "tim-cook",
+    name: "Tim Cook",
+    organisation: "Apple",
+    rarity: "Innovator",
+    shortBio: "Operational leader who expanded Apple's services, supply chain power, and device reach.",
+    specialAbility: "Operational Engine: +10 Execution when wealth is below opponent.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Tim_Cook_March_2026_%28cropped_2%29.jpg/330px-Tim_Cook_March_2026_%28cropped_2%29.jpg",
+    stats: { wealth: 75, innovation: 82, vision: 84, execution: 99, aiInfluence: 70, industryImpact: 93, legacy: 82, publicProfile: 88 },
+  },
+  {
+    id: "sundar-pichai",
+    name: "Sundar Pichai",
+    organisation: "Google",
+    rarity: "Innovator",
+    shortBio: "Led Chrome, Android-era product expansion, cloud bets, and Google's AI transition.",
+    specialAbility: "Platform Shield: +5 Execution when defending a lead.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Sundar_Pichai_-_2023_%28cropped%29.jpg/330px-Sundar_Pichai_-_2023_%28cropped%29.jpg",
+    stats: { wealth: 72, innovation: 88, vision: 90, execution: 94, aiInfluence: 94, industryImpact: 94, legacy: 84, publicProfile: 82 },
+  },
+  {
+    id: "larry-ellison",
+    name: "Larry Ellison",
+    organisation: "Oracle",
+    rarity: "Innovator",
+    shortBio: "Built Oracle into a database and enterprise software powerhouse.",
+    specialAbility: "Data Dominance: +10 Industry Impact when Legacy is selected next round.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Larry_Ellison_picture.png/330px-Larry_Ellison_picture.png",
+    stats: { wealth: 93, innovation: 88, vision: 90, execution: 96, aiInfluence: 70, industryImpact: 94, legacy: 94, publicProfile: 85 },
+  },
+  {
+    id: "marc-benioff",
+    name: "Marc Benioff",
+    organisation: "Salesforce",
+    rarity: "Innovator",
+    shortBio: "Popularized SaaS CRM and enterprise cloud software with a values-led brand.",
+    specialAbility: "Customer 360: +5 Execution when winning with Industry Impact.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Marc_Benioff.jpg/330px-Marc_Benioff.jpg",
+    stats: { wealth: 78, innovation: 87, vision: 89, execution: 93, aiInfluence: 72, industryImpact: 90, legacy: 85, publicProfile: 82 },
+  },
+  {
+    id: "reid-hoffman",
+    name: "Reid Hoffman",
+    organisation: "LinkedIn",
+    rarity: "Innovator",
+    shortBio: "Network builder, investor, and strategist across social platforms and AI startups.",
+    specialAbility: "Network Builder: draw an extra card after winning on Vision.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/2022_Reid_Hoffman_%28cropped%29.jpg/330px-2022_Reid_Hoffman_%28cropped%29.jpg",
+    stats: { wealth: 78, innovation: 88, vision: 95, execution: 86, aiInfluence: 85, industryImpact: 88, legacy: 86, publicProfile: 78 },
+  },
+  {
+    id: "palmer-luckey",
+    name: "Palmer Luckey",
+    organisation: "Anduril",
+    rarity: "Disruptor",
+    shortBio: "VR and defense technology founder building autonomous systems and hardware.",
+    specialAbility: "Defense Tech: Government Advantage when ties occur on Execution.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/CES_2026_-_Palmer_Luckey_01_%28cropped%29.jpg/330px-CES_2026_-_Palmer_Luckey_01_%28cropped%29.jpg",
+    stats: { wealth: 72, innovation: 92, vision: 94, execution: 88, aiInfluence: 75, industryImpact: 85, legacy: 75, publicProfile: 78 },
+  },
+  {
+    id: "alex-karp",
+    name: "Alex Karp",
+    organisation: "Palantir",
+    rarity: "Disruptor",
+    shortBio: "Built data platforms for intelligence, defense, enterprise operations, and AI workflows.",
+    specialAbility: "Data Advantage: +5 AI Influence when playing against Big Tech.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Alex_Karp_attends_AI_Summit_%2853302457013%29_4-5_ratio.jpg/330px-Alex_Karp_attends_AI_Summit_%2853302457013%29_4-5_ratio.jpg",
+    stats: { wealth: 68, innovation: 85, vision: 92, execution: 89, aiInfluence: 82, industryImpact: 88, legacy: 78, publicProfile: 82 },
+  },
+  {
+    id: "jack-dorsey",
+    name: "Jack Dorsey",
+    organisation: "Block",
+    rarity: "Disruptor",
+    shortBio: "Created Twitter and Block, blending social communication with financial tools.",
+    specialAbility: "Bitcoin Believer: +5 Legacy if Wealth is your lowest score.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Jack_Dorsey_in_Washington_D.C._-_2018_%2844538272181%29_%28cropped%29.jpg/330px-Jack_Dorsey_in_Washington_D.C._-_2018_%2844538272181%29_%28cropped%29.jpg",
+    stats: { wealth: 74, innovation: 90, vision: 90, execution: 82, aiInfluence: 80, industryImpact: 90, legacy: 88, publicProfile: 90 },
+  },
+  {
+    id: "daniel-ek",
+    name: "Daniel Ek",
+    organisation: "Spotify",
+    rarity: "Disruptor",
+    shortBio: "Reshaped music distribution, streaming economics, and creator platforms.",
+    specialAbility: "Music Everywhere: +5 Industry Impact globally.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Daniel_Ek_EC_2025_%28cropped%29.jpg/330px-Daniel_Ek_EC_2025_%28cropped%29.jpg",
+    stats: { wealth: 75, innovation: 88, vision: 89, execution: 91, aiInfluence: 70, industryImpact: 88, legacy: 84, publicProfile: 82 },
+  },
+  {
+    id: "linus-torvalds",
+    name: "Linus Torvalds",
+    organisation: "Linux",
+    rarity: "Founder",
+    shortBio: "Created Linux and Git, foundational tools for modern computing infrastructure.",
+    specialAbility: "Open Source Core: +10 Legacy when Wealth is challenged.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg/330px-LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg",
+    stats: { wealth: 40, innovation: 96, vision: 90, execution: 95, aiInfluence: 78, industryImpact: 98, legacy: 100, publicProfile: 84 },
+  },
+  {
+    id: "alan-turing",
+    name: "Alan Turing",
+    organisation: "Computing Science",
+    rarity: "Founder",
+    shortBio: "Mathematician whose work shaped computation, cryptanalysis, and machine intelligence.",
+    specialAbility: "Turing Test: automatic win on Legacy unless opponent is Founder.",
+    portraitUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Alan_turing_header.jpg/330px-Alan_turing_header.jpg",
+    stats: { wealth: 10, innovation: 100, vision: 100, execution: 90, aiInfluence: 100, industryImpact: 100, legacy: 100, publicProfile: 95 },
+  },
+];
