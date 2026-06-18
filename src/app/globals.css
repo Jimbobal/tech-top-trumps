@@ -209,6 +209,90 @@ button {
     rgba(10, 11, 19, 0.86);
 }
 
+.setup-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 0.7fr);
+  gap: 18px;
+  align-items: start;
+  width: min(1100px, 100%);
+  margin: 18px auto 0;
+  padding: 18px;
+  border: 3px solid #111111;
+  color: #111111;
+  background:
+    linear-gradient(90deg, var(--retro-yellow), #fff1a2 52%, var(--retro-blue) 52%, var(--retro-blue));
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.55);
+}
+
+.setup-panel h2 {
+  margin: 6px 0 8px;
+  font-family: Impact, "Arial Black", Arial, Helvetica, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.setup-panel p {
+  margin: 0;
+  color: #111111;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.setup-form {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 3px solid #111111;
+  background: var(--retro-cream);
+}
+
+.setup-form label {
+  display: grid;
+  gap: 5px;
+  color: #111111;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.setup-form input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 3px solid #111111;
+  color: #111111;
+  background: #ffffff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.setup-form button,
+.secondary-action {
+  min-height: 46px;
+  border: 3px solid #111111;
+  color: #ffffff;
+  background: var(--retro-red);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.45);
+}
+
+.setup-form .secondary-action {
+  color: #111111;
+  background: var(--retro-yellow);
+}
+
+.setup-error {
+  padding: 8px 10px;
+  border: 3px solid #111111;
+  color: #ffffff !important;
+  background: var(--retro-red);
+}
+
 .online-panel h2 {
   margin: 5px 0 6px;
   font-size: 1.35rem;
@@ -631,14 +715,20 @@ button {
   color: #111111;
 }
 
+.action-hint {
+  margin: 8px 0 0;
+  color: #111111;
+  font-weight: 900;
+}
+
 .rules-panel {
   margin-top: 14px;
 }
 
-.rules-panel h2 {
-  margin: 0 0 8px;
-  font-size: 1rem;
+.rules-panel summary {
+  cursor: pointer;
   color: #111111;
+  font-size: 1rem;
   font-family: Impact, "Arial Black", Arial, Helvetica, sans-serif;
   text-transform: uppercase;
 }
@@ -727,6 +817,11 @@ button {
   background: var(--retro-yellow);
 }
 
+.controls .primary-action {
+  color: #ffffff;
+  background: var(--retro-red);
+}
+
 @media (max-width: 1180px) {
   .battle-grid {
     grid-template-columns: 1fr 1fr;
@@ -760,6 +855,7 @@ button {
   }
 
   .hero,
+  .setup-panel,
   .online-panel,
   .round-console,
   .battle-grid,
@@ -768,6 +864,7 @@ button {
   }
 
   .hero,
+  .setup-panel,
   .online-panel,
   .round-console {
     display: grid;

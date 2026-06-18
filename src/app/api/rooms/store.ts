@@ -1,10 +1,15 @@
 import { chooseStatForState, continueState, createGameState, type GameState, type PlayerId } from "@/lib/gameEngine";
 import type { StatKey } from "@/lib/techTitansDeck";
 
+export type RoomPlayer = {
+  token: string;
+  name: string;
+};
+
 export type Room = {
   id: string;
   state: GameState;
-  players: Partial<Record<PlayerId, string>>;
+  players: Partial<Record<PlayerId, RoomPlayer | string>>;
   createdAt: number;
 };
 
@@ -23,17 +28,39 @@ function makeToken() {
   return crypto.randomUUID();
 }
 
+export function cleanPlayerName(name?: string) {
+  const trimmed = name?.trim() ?? "";
+  return trimmed.slice(0, 24);
+}
+
+function playerToken(player?: RoomPlayer | string) {
+  return typeof player === "string" ? player : player?.token;
+}
+
+function playerDisplayName(player: PlayerId, room: Room) {
+  const record = room.players[player];
+  if (typeof record === "string") return player === "p1" ? "Player 1" : "Player 2";
+  return record?.name || (player === "p1" ? "Player 1" : "Player 2");
+}
+
 function publicRoom(room: Room, token?: string) {
-  const role = token && room.players.p1 === token ? "p1" : token && room.players.p2 === token ? "p2" : null;
+  const role = token && playerToken(room.players.p1) === token ? "p1" : token && playerToken(room.players.p2) === token ? "p2" : null;
   return {
     id: room.id,
     role,
     state: room.state,
     playerCount: Number(Boolean(room.players.p1)) + Number(Boolean(room.players.p2)),
+    players: {
+      p1: room.players.p1 ? playerDisplayName("p1", room) : undefined,
+      p2: room.players.p2 ? playerDisplayName("p2", room) : undefined,
+    },
   };
 }
 
-export function createRoom() {
+export function createRoom(name: string) {
+  const playerName = cleanPlayerName(name);
+  if (!playerName) return null;
+
   let id = makeId();
   while (rooms.has(id)) id = makeId();
 
@@ -41,7 +68,7 @@ export function createRoom() {
   const room: Room = {
     id,
     state: createGameState(),
-    players: { p1: token },
+    players: { p1: { token, name: playerName } },
     createdAt: Date.now(),
   };
   rooms.set(id, room);
@@ -53,17 +80,22 @@ export function getRoom(roomId: string, token?: string) {
   return room ? publicRoom(room, token) : null;
 }
 
-export function joinRoom(roomId: string, token?: string) {
+export function joinRoom(roomId: string, name: string, token?: string) {
   const room = rooms.get(roomId.toUpperCase());
   if (!room) return null;
 
-  if (token && (room.players.p1 === token || room.players.p2 === token)) {
+  const playerName = cleanPlayerName(name);
+  if (!playerName) return null;
+
+  if (token && (playerToken(room.players.p1) === token || playerToken(room.players.p2) === token)) {
+    const role: PlayerId = playerToken(room.players.p1) === token ? "p1" : "p2";
+    room.players[role] = { token, name: playerName };
     return { token, room: publicRoom(room, token) };
   }
 
   if (!room.players.p2) {
     const nextToken = makeToken();
-    room.players.p2 = nextToken;
+    room.players.p2 = { token: nextToken, name: playerName };
     return { token: nextToken, room: publicRoom(room, nextToken) };
   }
 
@@ -74,7 +106,7 @@ export function applyRoomAction(roomId: string, token: string | undefined, actio
   const room = rooms.get(roomId.toUpperCase());
   if (!room) return null;
 
-  const role = token && room.players.p1 === token ? "p1" : token && room.players.p2 === token ? "p2" : null;
+  const role = token && playerToken(room.players.p1) === token ? "p1" : token && playerToken(room.players.p2) === token ? "p2" : null;
 
   if (action.type === "choose" && action.stat && role === room.state.activePlayer) {
     room.state = chooseStatForState(room.state, action.stat);

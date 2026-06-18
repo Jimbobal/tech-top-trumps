@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { applyRoomAction, getRoom, joinRoom } from "@/app/api/rooms/store";
+import { applyRoomAction, cleanPlayerName, getRoom, joinRoom } from "@/app/api/rooms/store";
 import { statKeys, type StatKey } from "@/lib/techTitansDeck";
 
 type RouteContext = {
@@ -16,10 +16,11 @@ export async function GET(request: NextRequest, context: RouteContext) {
 
 export async function POST(request: NextRequest, context: RouteContext) {
   const { roomId } = await context.params;
-  const body = (await request.json().catch(() => ({}))) as { token?: string; type?: string; stat?: string };
+  const body = (await request.json().catch(() => ({}))) as { token?: string; type?: string; stat?: string; name?: string };
 
   if (body.type === "join") {
-    const joined = joinRoom(roomId, body.token);
+    if (!cleanPlayerName(body.name)) return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    const joined = joinRoom(roomId, body.name ?? "", body.token);
     if (!joined) return NextResponse.json({ error: "Room not found" }, { status: 404 });
     return NextResponse.json(joined);
   }
